@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Birtday Baby</title>
+
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    overflow: hidden; /* Ensure video covers entire screen */
+  }
+  
+  .video-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw; /* Set width to cover entire viewport */
+    height: 100vh; /* Set height to cover entire viewport */
+    object-fit: cover; /* Ensure the video covers the entire container */
+    z-index: -1; /* Place behind other content */
+}
+  
+  .letter-container {
+    perspective: 1000px;
+    cursor: pointer;
+    width: 600px;
+    z-index: 1; /* Ensure letter is in front of video */
+  }
+  
+  .letter {
+    background-color: transparent; /* Set background color to transparent */
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    transition: transform 0.5s;
+    transform-style: preserve-3d;
+    height: 400px;
+  }
+  
+  .front, .back {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background-size: cover; /* Ensure background image covers the entire element */
+    background-position: center; /* Center the background image */
+    border-radius: 10px; /* Ensure border radius applies to background image */
+  }
+  
+  .front {
+    z-index: 2;
+    background-image: url('palagi.jpeg'); /* Specify background image for front of the letter */
+  }
+  
+  .back {
+    transform: rotateY(180deg);
+    z-index: 1;
+    background-image: url('Palage.jpg'); /* Specify background image for back of the letter */
+  }
+  
+  .open .letter {
+    transform: rotateY(-180deg);
+  }
+  
+  h1 {
+    color: #ffffff;
+    margin: 0;
+    padding: 0;
+  }
+  
+  p {
+    color: #ffffff;
+    font-size: 18px;
+    line-height: 1.6;
+    margin: 10px 0;
+  }
+  
+  /* Button Style */
+  #hideButton {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background-color: #fff;
+    color: #000;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    display: none; /* Initially hide the button */
+  }
+</style>
+</head>
+<body>
+  <!-- Background Video -->
+  <video class="video-background" loop muted>
+    <source src="palagifinal.mp4" type="video/mp4">
+    Your browser does not support the video tag.
+  </video>
+  
+  <!-- Background Audio -->
+  <audio id="background-audio" loop>
+    <source src="palagifinal.mp4" type="audio/mpeg">
+    Your browser does not support the audio tag.
+  </audio>
+
+  <!-- Hide Button -->
+  <button id="hideButton" onclick="hideLetter()">Hide Letter</button>
+
+  <div class="letter-container" onclick="openLetter()">
+    <div class="letter">
+      <div class="front">
+        <h1></h1>
+        <p></p>
+        <p></p>
+      </div>
+      <div class="back">
+        <p>Happy Birtday!! laloveshoneybunchsugarpiechocolatecakewith<br>sprinklesontopcoatedwithmarshmallowandnoodlebaby,</p>
+        <p>Wishing you a day filled with laughter, love, and all the happiness<br> in the world. Here's to many more wonderful years ahead,filled with<br> unforgettable memories. Enjoy your special day to the fullest!</p>
+        <p>Thank you for being so beautiful everyday, inside and out.<br> heheheh dili ni eme</p>
+        <p>Again, happy birthday, baby!!!</p>
+        <p> </p>
+        <p>-Danesoy</p>
+      </div>
+    </div>
+  </div>
+
+<script>
+  function openLetter() {
+    const letterContainer = document.querySelector('.letter-container');
+    letterContainer.classList.toggle('open');
+    
+    const video = document.querySelector('.video-background');
+    const audio = document.getElementById('background-audio');
+    const hideButton = document.getElementById('hideButton');
+    if (letterContainer.classList.contains('open')) {
+      video.style.display = "block"; // Show video when letter is opened
+      video.play(); // Play video
+      audio.play(); // Play audio
+      hideButton.style.display = "block"; // Show hide button when letter is opened
+    } else {
+      video.pause(); // Pause video when letter is closed
+      audio.pause(); // Pause audio
+      hideButton.style.display = "none"; // Hide hide button when letter is closed
+    }
+  }
+
+  function hideLetter() {
+  const letterContainer = document.querySelector('.letter-container');
+  const hideButton = document.getElementById('hideButton');
+  
+  if (letterContainer.style.display === "none") {
+    // If letterbox is hidden, make it visible again
+    letterContainer.style.display = "block";
+    hideButton.textContent = "Hide Letter"; // Change button text
+  } else {
+    // If letterbox is visible, hide it
+    letterContainer.style.display = "none";
+    hideButton.textContent = "Show Letter"; // Change button text
+  }
+}
+</script>
+</body>
+</html>
